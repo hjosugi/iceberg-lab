@@ -1,0 +1,26 @@
+{
+  "name": "Iceberg R2 Online Lab",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "python -m pip install -e '.[dev]'",
+  "remoteEnv": {
+    "ICEBERG_CATALOG_URI": "${localEnv:ICEBERG_CATALOG_URI}",
+    "ICEBERG_WAREHOUSE": "${localEnv:ICEBERG_WAREHOUSE}",
+    "ICEBERG_TOKEN": "${localEnv:ICEBERG_TOKEN}",
+    "ICEBERG_CATALOG_NAME": "${localEnv:ICEBERG_CATALOG_NAME:r2}",
+    "ICEBERG_NAMESPACE": "${localEnv:ICEBERG_NAMESPACE:demo}",
+    "ICEBERG_TABLE": "${localEnv:ICEBERG_TABLE:people}",
+    "DUCKDB_CATALOG_ALIAS": "${localEnv:DUCKDB_CATALOG_ALIAS:r2_iceberg}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff"
+      ]
+    }
+  }
+}

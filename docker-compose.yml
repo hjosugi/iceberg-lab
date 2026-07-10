@@ -1,0 +1,17 @@
+services:
+  lab:
+    build:
+      context: .
+    image: iceberg-r2-online-lab:local
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    environment:
+      ICEBERG_CATALOG_URI: ${ICEBERG_CATALOG_URI:-}
+      ICEBERG_WAREHOUSE: ${ICEBERG_WAREHOUSE:-}
+      ICEBERG_TOKEN: ${ICEBERG_TOKEN:-}
+      ICEBERG_CATALOG_NAME: ${ICEBERG_CATALOG_NAME:-r2}
+      ICEBERG_NAMESPACE: ${ICEBERG_NAMESPACE:-demo}
+      ICEBERG_TABLE: ${ICEBERG_TABLE:-people}
+      DUCKDB_CATALOG_ALIAS: ${DUCKDB_CATALOG_ALIAS:-r2_iceberg}
+    command: sleep infinity

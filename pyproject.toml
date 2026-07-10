@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iceberg-r2-online-lab"
+version = "1.0.0"
+description = "A low-cost online Apache Iceberg lab using Cloudflare R2 Data Catalog"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Iceberg R2 Online Lab Maintainers"}
+]
+keywords = ["apache-iceberg", "cloudflare-r2", "duckdb", "pyiceberg", "lakehouse"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Database",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+  "duckdb>=1.4.0",
+  "pandas>=2.0.0",
+  "pyarrow>=16.0.0",
+  "pyiceberg>=0.9.0",
+  "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.5.0",
+]
+
+[project.scripts]
+iceberg-r2-lab = "iceberg_r2_lab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
