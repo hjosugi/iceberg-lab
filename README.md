@@ -148,9 +148,12 @@ DuckDB で使う attach SQL を生成します。
 iceberg-r2-lab duckdb-sql > .generated/duckdb_attach.sql
 ```
 
-DuckDB を起動します。
+生成SQLにtoken値は含まれません。`.env`をshell環境へexportしてからDuckDBを起動します。
 
 ```bash
+set -a
+source .env
+set +a
 duckdb
 ```
 
@@ -211,15 +214,16 @@ make package
 出力:
 
 ```text
-dist/iceberg-r2-online-lab-v1.0.0.zip
-dist/iceberg-r2-online-lab-v1.0.0.zip.sha256
+dist/iceberg-r2-online-lab-v1.0.1.zip
+dist/iceberg-r2-online-lab-v1.0.1.zip.sha256
 ```
 
 GitHub Actions で release する場合:
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+VERSION="$(cat VERSION)"
+git tag "v${VERSION}"
+git push origin "v${VERSION}"
 ```
 
 `.github/workflows/release.yml` が release asset として ZIP と SHA256 を添付します。

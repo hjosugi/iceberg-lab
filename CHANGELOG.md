@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 - 2026-07-10
+
+- Stop embedding R2 API tokens in generated DuckDB SQL
+- Read `ICEBERG_TOKEN` from the DuckDB process environment
+- Verify source version declarations and release tags agree
+
 ## 1.0.0
 
 Initial release.

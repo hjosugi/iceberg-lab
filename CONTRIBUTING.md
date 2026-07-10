@@ -20,8 +20,9 @@ ruff check .
 ## Release
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+VERSION="$(cat VERSION)"
+git tag "v${VERSION}"
+git push origin "v${VERSION}"
 ```
 
 The release workflow builds a ZIP and uploads it to GitHub Releases.

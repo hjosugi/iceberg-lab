@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "iceberg-r2-online-lab"
-version = "1.0.0"
+version = "1.0.1"
 description = "A low-cost online Apache Iceberg lab using Cloudflare R2 Data Catalog"
 readme = "README.md"
 requires-python = ">=3.10"
