@@ -29,6 +29,8 @@ def should_include(path: Path) -> bool:
         return False
     if path.name in EXCLUDE_FILES:
         return False
+    if path.name.startswith(".env.") and path.name != ".env.example":
+        return False
     if path.suffix in {".pyc", ".pyo"}:
         return False
     return True
@@ -43,7 +45,7 @@ def build_zip(root: Path, version: str) -> Path:
 
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(root.rglob("*")):
-            if not path.is_file():
+            if path.is_symlink() or not path.is_file():
                 continue
             rel = path.relative_to(root)
             if not should_include(rel):

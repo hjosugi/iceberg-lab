@@ -7,8 +7,26 @@ def sql_quote(value: str) -> str:
     return "'" + value.replace("'", "''") + "'"
 
 
+def sql_identifier(value: str) -> str:
+    """Quote a DuckDB identifier without treating it as SQL."""
+    if not value:
+        raise ValueError("DuckDB identifiers must not be empty.")
+
+    return '"' + value.replace('"', '""') + '"'
+
+
+def qualified_identifier(*parts: str) -> str:
+    return ".".join(sql_identifier(part) for part in parts)
+
+
 def generate_attach_sql(settings: Settings) -> str:
-    alias = settings.duckdb_catalog_alias
+    alias = sql_identifier(settings.duckdb_catalog_alias)
+    schema = qualified_identifier(settings.duckdb_catalog_alias, settings.namespace)
+    table = qualified_identifier(
+        settings.duckdb_catalog_alias,
+        settings.namespace,
+        settings.table,
+    )
     warehouse = sql_quote(settings.warehouse)
     endpoint = sql_quote(settings.catalog_uri)
     token = sql_quote(settings.token)
@@ -20,6 +38,9 @@ def generate_attach_sql(settings: Settings) -> str:
 INSTALL iceberg;
 LOAD iceberg;
 
+INSTALL httpfs;
+LOAD httpfs;
+
 CREATE SECRET r2_iceberg_secret (
     TYPE iceberg,
     TOKEN {token}
@@ -27,12 +48,14 @@ CREATE SECRET r2_iceberg_secret (
 
 ATTACH {warehouse} AS {alias} (
     TYPE iceberg,
-    ENDPOINT {endpoint}
+    SECRET r2_iceberg_secret,
+    ENDPOINT {endpoint},
+    SUPPORT_NESTED_NAMESPACES true
 );
 
-CREATE SCHEMA IF NOT EXISTS {alias}.{settings.namespace};
-USE {alias}.{settings.namespace};
+CREATE SCHEMA IF NOT EXISTS {schema};
+USE {schema};
 
 -- Example:
--- SELECT * FROM {alias}.{settings.namespace}.{settings.table} LIMIT 20;
+-- SELECT * FROM {table} LIMIT 20;
 """

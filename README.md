@@ -40,6 +40,8 @@ Compute: 必要な時だけ local PC / GitHub Codespaces / DuckDB / Python
 
 Cloudflare R2 Data Catalog は R2 bucket に組み込まれた managed Apache Iceberg catalog です。標準 Iceberg REST Catalog interface を公開するため、PyIceberg や DuckDB などから接続できます。
 
+Data Catalog の catalog operation、compaction、R2 storage / operation には無料枠と従量課金があります。金額や無料枠は変更されるため、実行前に [R2 Data Catalog pricing](https://developers.cloudflare.com/r2/data-catalog/platform/pricing/) と [R2 pricing](https://developers.cloudflare.com/r2/pricing/) を確認してください。
+
 ## 前提
 
 - Cloudflare account
