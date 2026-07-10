@@ -20,9 +20,17 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Verify release version
+        run: |
+          VERSION="$(cat VERSION)"
+          if [[ "${GITHUB_REF_NAME}" != "v${VERSION}" ]]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match VERSION ${VERSION}." >&2
+            exit 1
+          fi
+
       - name: Build release ZIP
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="$(cat VERSION)"
           python scripts/package_release.py --version "${VERSION}"
           ls -lah dist
 

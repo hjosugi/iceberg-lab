@@ -4,17 +4,18 @@ from iceberg_r2_lab.duckdb_sql import generate_attach_sql, sql_identifier
 from iceberg_r2_lab.settings import Settings
 
 
-def test_generate_attach_sql_escapes_token():
+def test_generate_attach_sql_reads_token_from_environment():
     settings = Settings(
         catalog_uri="https://example.com/catalog",
         warehouse="warehouse",
-        token="abc'def",
+        token="never-write-this-token",
     )
 
     sql = generate_attach_sql(settings)
 
     assert "CREATE SECRET" in sql
-    assert "abc''def" in sql
+    assert "TOKEN getenv('ICEBERG_TOKEN')" in sql
+    assert settings.token not in sql
     assert "INSTALL httpfs;" in sql
     assert "LOAD httpfs;" in sql
     assert "ATTACH 'warehouse' AS \"r2_iceberg\"" in sql

@@ -1,5 +1,6 @@
 -- Replace placeholders before running.
 -- Do not commit a filled-in version of this file.
+-- Export ICEBERG_TOKEN before starting DuckDB; the token is not embedded here.
 
 INSTALL iceberg;
 LOAD iceberg;
@@ -9,7 +10,7 @@ LOAD httpfs;
 
 CREATE SECRET r2_iceberg_secret (
     TYPE iceberg,
-    TOKEN '<ICEBERG_TOKEN>'
+    TOKEN getenv('ICEBERG_TOKEN')
 );
 
 ATTACH '<ICEBERG_WAREHOUSE>' AS r2_iceberg (
