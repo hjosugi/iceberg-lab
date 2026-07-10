@@ -4,6 +4,9 @@
 INSTALL iceberg;
 LOAD iceberg;
 
+INSTALL httpfs;
+LOAD httpfs;
+
 CREATE SECRET r2_iceberg_secret (
     TYPE iceberg,
     TOKEN '<ICEBERG_TOKEN>'
@@ -11,7 +14,9 @@ CREATE SECRET r2_iceberg_secret (
 
 ATTACH '<ICEBERG_WAREHOUSE>' AS r2_iceberg (
     TYPE iceberg,
-    ENDPOINT '<ICEBERG_CATALOG_URI>'
+    SECRET r2_iceberg_secret,
+    ENDPOINT '<ICEBERG_CATALOG_URI>',
+    SUPPORT_NESTED_NAMESPACES true
 );
 
 CREATE SCHEMA IF NOT EXISTS r2_iceberg.demo;

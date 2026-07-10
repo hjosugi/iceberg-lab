@@ -30,6 +30,9 @@ LIMIT 20;
 INSTALL iceberg;
 LOAD iceberg;
 
+INSTALL httpfs;
+LOAD httpfs;
+
 CREATE SECRET r2_iceberg_secret (
     TYPE iceberg,
     TOKEN '<ICEBERG_TOKEN>'
@@ -37,7 +40,9 @@ CREATE SECRET r2_iceberg_secret (
 
 ATTACH '<ICEBERG_WAREHOUSE>' AS r2_iceberg (
     TYPE iceberg,
-    ENDPOINT '<ICEBERG_CATALOG_URI>'
+    SECRET r2_iceberg_secret,
+    ENDPOINT '<ICEBERG_CATALOG_URI>',
+    SUPPORT_NESTED_NAMESPACES true
 );
 ```
 
@@ -50,6 +55,7 @@ DuckDB の Iceberg extension を更新します。
 ```sql
 UPDATE EXTENSIONS;
 LOAD iceberg;
+LOAD httpfs;
 ```
 
 ### token が漏れそう

@@ -54,7 +54,9 @@ iceberg-r2-lab create
 
 ## Cost が心配
 
+- [R2 Data Catalog pricing](https://developers.cloudflare.com/r2/data-catalog/platform/pricing/) と [R2 pricing](https://developers.cloudflare.com/r2/pricing/) で最新の無料枠と従量課金を確認する
 - 大量 append しない
 - sample data は数行にする
+- 不要なら automatic compaction / snapshot expiration を有効にしない
 - 検証後は table / catalog / bucket を cleanup する
 - Codespaces は使い終わったら stop する
