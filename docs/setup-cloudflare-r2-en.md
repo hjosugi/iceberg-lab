@@ -3,9 +3,9 @@
 
 # Cloudflare R2 Data Catalog setup
 
-## 目的
+## Purpose
 
-Cloudflare R2 bucket に Iceberg catalog を有効化し、PyIceberg / DuckDB から接続できるようにします。
+Enable the Iceberg catalog on the Cloudflare R2 bucket so that it can be accessed from PyIceberg / DuckDB.
 
 ## 1. Wrangler login
 
@@ -13,26 +13,25 @@ Cloudflare R2 bucket に Iceberg catalog を有効化し、PyIceberg / DuckDB �
 npx wrangler@latest login
 ```
 
-## 2. Bucket 作成
+## 2. Create Bucket
 
 ```bash
 npx wrangler@latest r2 bucket create iceberg-lab
 ```
 
-## 3. Data Catalog 有効化
+## 3. Enable Data Catalog
 
 ```bash
 npx wrangler@latest r2 bucket catalog enable iceberg-lab
 ```
 
-この出力に `Catalog URI` と `Warehouse name` が表示されます。
+This output will display the `Catalog URI` and `Warehouse name`.
 
-## 4. Token 作成
+## 4. Create Token
 
-Cloudflare dashboard で R2 API token を作ります。
+Create an R2 API token in the Cloudflare dashboard.
 
-lab 用なら最初は `Admin Read & Write` が一番簡単です。
-長期運用や共有 repo では、対象 bucket / catalog に絞った token にしてください。
+For lab use, starting with `Admin Read & Write` is the easiest. For long-term operations or shared repos, please create a token limited to the specific bucket / catalog.
 
 ## 5. `.env`
 
@@ -46,14 +45,14 @@ ICEBERG_WAREHOUSE=...
 ICEBERG_TOKEN=...
 ```
 
-## 6. 接続確認
+## 6. Connection Check
 
 ```bash
 make doctor
 make doctor ARGS=--connect
 ```
 
-または:
+Or:
 
 ```bash
 iceberg-r2-lab doctor --connect

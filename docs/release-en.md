@@ -9,7 +9,7 @@
 make package
 ```
 
-出力:
+Output:
 
 ```text
 dist/iceberg-r2-online-lab-v1.0.1.zip
@@ -24,7 +24,7 @@ git tag "v${VERSION}"
 git push origin "v${VERSION}"
 ```
 
-`.github/workflows/release.yml` が ZIP と SHA256 を GitHub Release に添付します。
+`.github/workflows/release.yml` will attach the ZIP and SHA256 to the GitHub Release.
 
 ## Verify SHA256
 

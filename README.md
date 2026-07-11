@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](README.md) | [日本語](README.ja.md)
+
 # Iceberg R2 Online Lab
 
 Cloudflare R2 Data Catalog を使って、ほぼ固定費なしで Apache Iceberg を online に試すための最小プロジェクトです。

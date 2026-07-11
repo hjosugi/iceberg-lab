@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](duckdb-en.md) | [日本語](duckdb-ja.md)
+
 # DuckDB から Cloudflare R2 Data Catalog に接続する
 
 ## SQL を生成
