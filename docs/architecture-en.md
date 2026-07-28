@@ -3,7 +3,7 @@
 
 # Architecture
 
-## 構成
+## Configuration
 
 ```text
 Client
@@ -16,7 +16,7 @@ Cloudflare R2 Data Catalog
 Cloudflare R2 bucket
 ```
 
-## 役割
+## Roles
 
 | Component | Role |
 |---|---|
@@ -27,15 +27,15 @@ Cloudflare R2 bucket
 | DuckDB | Lightweight SQL query engine |
 | Codespaces | Browser-accessible compute |
 
-## Interview 向け整理
+## Organization for Interviews
 
-Iceberg は database ではなく table format です。
+Iceberg is not a database but a table format.
 
-Object storage には data files と metadata files が置かれます。
-Catalog は table name から current metadata file への pointer を管理します。
-Query engine は catalog から metadata を取得し、必要な Parquet files を読みます。
+Object storage contains data files and metadata files.
+The catalog manages the pointer from the table name to the current metadata file.
+The query engine retrieves metadata from the catalog and reads the necessary Parquet files.
 
-## なぜ安いか
+## Why It Is Cheap
 
-compute を常時起動しないためです。
-状態は R2 bucket と R2 Data Catalog に置き、compute は必要なときだけ使います。
+It is because compute is not always running.
+State is stored in the R2 bucket and R2 Data Catalog, and compute is used only when necessary.

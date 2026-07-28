@@ -1,3 +1,6 @@
+<!-- i18n: language-switcher -->
+[English](troubleshooting-en.md) | [日本語](troubleshooting-ja.md)
+
 # Troubleshooting
 
 ## `Missing required environment variables`
