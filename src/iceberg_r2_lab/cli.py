@@ -44,7 +44,8 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         try:
             catalog = connect_catalog(settings)
             namespaces = catalog.list_namespaces()
-        except Exception as exc:  # pragma: no cover - requires remote catalog
+        # The connection test reports any failure from the remote catalog and exits 1.
+        except Exception as exc:  # noqa: BLE001  # pragma: no cover - requires remote catalog
             print()
             print(f"Connection test failed: {exc}", file=sys.stderr)
             return 1
