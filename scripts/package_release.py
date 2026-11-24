@@ -1,10 +1,10 @@
+#!/usr/bin/env python3
 from __future__ import annotations
 
 import argparse
 import hashlib
-from pathlib import Path
 import zipfile
-
+from pathlib import Path
 
 EXCLUDE_DIRS = {
     ".git",
@@ -31,9 +31,7 @@ def should_include(path: Path) -> bool:
         return False
     if path.name.startswith(".env.") and path.name != ".env.example":
         return False
-    if path.suffix in {".pyc", ".pyo"}:
-        return False
-    return True
+    return path.suffix not in {".pyc", ".pyo"}
 
 
 def build_zip(root: Path, version: str) -> Path:

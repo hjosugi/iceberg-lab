@@ -1,9 +1,8 @@
-from pathlib import Path
 import runpy
 import zipfile
+from pathlib import Path
 
 import pytest
-
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "package_release.py"
 build_zip = runpy.run_path(str(SCRIPT), run_name="package_release")["build_zip"]

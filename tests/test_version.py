@@ -1,8 +1,7 @@
-from pathlib import Path
 import re
+from pathlib import Path
 
 from iceberg_r2_lab import __version__
-
 
 ROOT = Path(__file__).parents[1]
 
